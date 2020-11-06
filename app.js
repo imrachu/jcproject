@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const Item = require('./models/items');
 const app = express();
 const mongodb = 'mongodb+srv://ckmobile:ckmobile123@cluster0.niuuw.mongodb.net/item-database?retryWrites=true&w=majority';
 mongoose.connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
@@ -11,13 +12,18 @@ mongoose.connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true }).t
 app.set('view engine', 'ejs');
 
 
+
+
 app.get('/', (req, res) => {
-    const items = [
-        { name: 'mobile phone', price: 1000 },
-        { name: 'book', price: 30 },
-        { name: 'computer', price: 2000 },
-    ]
-    res.render('index', { items });
+    res.redirect('/get-items');
+})
+
+app.get('/get-items', (req, res) => {
+
+    Item.find().then(result => {
+
+        res.render('index', { items: result });
+    }).catch(err => console.log(err))
 })
 app.get('/add-item', (req, res) => {
     res.render('add-item');
