@@ -6,10 +6,10 @@
 <body>
     <%- include('./partials/nav.ejs') %>
     <div class="container">
-        <h4>Item Detail</h4>
+        <h4>Customer Detail</h4>
         <div>
-            <h5>item name: <%= item.name %></h5>
-            <h5>item pice: $<%= item.price %></h5>
+            <h5>Customer Name: <%= item.name %></h5>
+            <h5>Balance: Rs.<%= item.price %></h5>
         </div>
         <a id="deleteBtn" class="delete btn" data-id="<%=item._id%>" href="">Delete</a>
     </div>
